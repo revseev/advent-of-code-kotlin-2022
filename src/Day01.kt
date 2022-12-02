@@ -1,17 +1,26 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+    println(task1())
+
+    println(task2())
+}
+
+private fun task1(): Long {
+    var max = 0L
+    readInputAsSequence("Day01") {
+        max = maxOf { elfCalories ->
+            elfCalories.sumOf { calorie -> calorie.toLong() }
+        }
     }
+    return max
+}
 
-    fun part2(input: List<String>): Int {
-        return input.size
+private fun task2(): Long {
+    var largestThreeInTotal = 0L
+    readInputAsSequence("Day01") {
+        largestThreeInTotal = map { elfCalories ->
+            elfCalories.sumOf { calorie -> calorie.toLong() }
+        }.sortedDescending()
+            .take(3).sum()
     }
-
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
+    return largestThreeInTotal
 }
