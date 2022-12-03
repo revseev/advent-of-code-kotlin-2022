@@ -43,6 +43,13 @@ fun <T> Iterator<T>.groupIterator(predicate: (T) -> Boolean): Iterator<T> = obje
     }
 }
 
+fun IntArray.clear() {
+    for (i in indices) {
+        this[i] = 0
+    }
+}
+
+
 /**
  * Converts string to md5 hash.
  */
