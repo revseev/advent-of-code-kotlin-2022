@@ -7,15 +7,15 @@ import java.security.MessageDigest
  */
 fun readInput(name: String): List<String> = File("src", "$name.txt").readLines()
 
+inline fun readInputAsSequence(name: String, block: Sequence<String>.() -> Unit) =
+    File("src", "$name.txt").useLines {
+        it.block()
+    }
+
 inline fun readInputAsSequenceGrouped(name: String, block: Sequence<Sequence<String>>.() -> Unit) =
     File("src", "$name.txt").useLines {
         it.groupedAsSequencesBy { line -> line.isNotBlank() }
             .block()
-    }
-
-inline fun readInputAsSequence(name: String, block: Sequence<String>.() -> Unit) =
-    File("src", "$name.txt").useLines {
-        it.block()
     }
 
 fun <T> Sequence<T>.groupedAsSequencesBy(predicate: (T) -> Boolean): Sequence<Sequence<T>> = sequence {
